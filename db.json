@@ -1,0 +1,28 @@
+{
+    "pizza": [
+        {
+            "id": 3,
+            "name": "jivya",
+            "price": 78
+        }
+    ],
+    "burger": [
+        {
+            "id": 1,
+            "name": "dhyey",
+            "price": 300
+        }
+    ],
+    "pasta": [
+        {
+            "id": 1,
+            "name": "visha",
+            "price": 100
+        }
+    ],
+    "counter": {
+        "burger": 0,
+        "pasta": 0,
+        "pizza": 5
+    }
+}
