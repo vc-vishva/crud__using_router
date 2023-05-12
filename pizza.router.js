@@ -2,16 +2,16 @@ const pizzaRouter = require("express").Router();
 const bodyParser = require('body-parser');
 const dbPath = './db.json';
 const fs = require('fs');
-const data = require('./db.json');
+// const data = require('./db.json');
+const data = require(`./${process.env.data}`);
+
+// const data = require(process.env.data)
 pizzaRouter.use(bodyParser.json());
 //get all
-pizzaRouter.get('/get', (req, res) => {
-  try {
-    const data = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(400).json({ error: 'Error retrieving data from database' });
-  }
+pizzaRouter.get('/', (req, res) => {
+  const userdata = data.pizza 
+  res.json(userdata);
+  
 });
 //specific
 pizzaRouter.get('/:id', (req, res) => {
@@ -60,11 +60,12 @@ pizzaRouter.put('/:id', (req, res) => {
 });
 //delete
 pizzaRouter.delete('/:id', (req, res) => {
-  // const { id } = req.params;
+  
   const id = parseInt(req.params.id);
   const index = data.pizza.findIndex(p => p.id === id);
   if (index >= 0) {
     data.pizza.splice(index, 1);
+    // data.counter.pizza -= 1;
     fs.writeFileSync(dbPath, JSON.stringify(data));
     res.status(200).json({ message: 'Pizza deleted successfully' });
   } else {
